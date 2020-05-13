@@ -1,4 +1,5 @@
 {
     "domain": "dev-hp5zpw8i.auth0.com",
-    "clientId": "Fqe5lONdoRJK571hytDTo9uMKoUMAw8F"
+    "clientId": "Fqe5lONdoRJK571hytDTo9uMKoUMAw8F",
+    "audience": "dominoAPI"
 }
