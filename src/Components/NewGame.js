@@ -1,36 +1,45 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { PlayersContext } from '../PlayersContext';
 import { TextField, Button } from "@material-ui/core";
+import history from '../Utils/history';
 
 const NewGame = () => {
-    const [newplayer, setNewPlayer] = React.useState('');
-    const [players, setPlayers] = React.useState([]);
+    const {players, setPlayers} = useContext(PlayersContext)
+    const [newPlayer, setNewPlayer] = useState('');
+    
     const handleChange = (e) => {
         setNewPlayer(e.target.value)
     }
     const handleAddPlayer = (e) => {
         e.preventDefault();
 
-        if (newplayer.trim() !== '') {
-            setPlayers(players.concat(newplayer));
+        if (newPlayer.trim() !== '') {
+            setPlayers(players.concat(newPlayer));
             setNewPlayer('');
         }
     }
-    const playersList = players.map ((player, id) => {
-        return (
-        <li key = {id}>{player}</li>
-        )
-    }
+    const playersList = players.map ((player, id) => 
+        <li key={`${id}-player`}>{player}</li>
     )
+
     return (
         <div>
             <p>New Game</p>
             <p>Agrega jugadores</p>
-        
             <form onSubmit={handleAddPlayer} autoComplete="off">
-                <TextField id="stardard-basic" label="Add a player" value = {newplayer} onChange={handleChange} />
-                <Button onClick={handleAddPlayer}>Add new player</Button>
+                <TextField 
+                id="stardard-basic" 
+                label="Add a player" 
+                value={newPlayer} 
+                onChange={handleChange} />
+                <Button 
+                onClick={handleAddPlayer}>
+                    Add new player
+                </Button>
             </form>
             <ol>Jugador: {playersList}</ol>
+
+            <Button onClick = {() =>history.push('/score')}>Empezar juego!</Button> 
         </div>
     )
 }

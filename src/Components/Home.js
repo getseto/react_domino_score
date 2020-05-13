@@ -1,5 +1,6 @@
 import React from "react";
 import history from "../Utils/history";
+import '../App.css';
 import { Container, Grid, Button } from "@material-ui/core";
 
 const Home = () => {

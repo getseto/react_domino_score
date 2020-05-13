@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.MuiButton-root {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
