@@ -7,6 +7,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import ExternalApi from "./Views/ExternalApi";
 import Home from "./Components/Home";
 import NewGame from "./Components/NewGame"
+import GameScore from "./Views/GameScore"
 import 'typeface-roboto'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/external-api" component={ExternalApi} />
           <PrivateRoute path="/newgame" component={NewGame} />
+          <PrivateRoute path="/score" component={GameScore} />
         </Switch>
       </Router>
     </div>
