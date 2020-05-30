@@ -6,7 +6,7 @@ import { Container, Grid, Button } from "@material-ui/core";
 const Home = () => {
     return (
       <Container>
-          Bienvenido!
+          Welcome!
           <Grid container alignItems='center'>
               <Grid item xs={6}>
                 <Button>

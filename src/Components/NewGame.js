@@ -4,7 +4,7 @@ import { TextField, Button } from "@material-ui/core";
 import history from '../Utils/history';
 
 const NewGame = () => {
-    const {players, setPlayers} = useContext(PlayersContext)
+    const {game, addPlayer} = useContext(PlayersContext)
     const [newPlayer, setNewPlayer] = useState('');
     
     const handleChange = (e) => {
@@ -14,10 +14,11 @@ const NewGame = () => {
         e.preventDefault();
 
         if (newPlayer.trim() !== '') {
-            setPlayers(players.concat(newPlayer));
+            addPlayer(newPlayer);
             setNewPlayer('');
         }
     }
+    const players = game.map(obj => obj.player);
     const playersList = players.map ((player, id) => 
         <li key={`${id}-player`}>{player}</li>
     )
@@ -25,7 +26,7 @@ const NewGame = () => {
     return (
         <div>
             <p>New Game</p>
-            <p>Agrega jugadores</p>
+            <p>Set players</p>
             <form onSubmit={handleAddPlayer} autoComplete="off">
                 <TextField 
                 id="stardard-basic" 
@@ -37,9 +38,9 @@ const NewGame = () => {
                     Add new player
                 </Button>
             </form>
-            <ol>Jugador: {playersList}</ol>
+            <ol>Players: {playersList}</ol>
 
-            <Button onClick = {() =>history.push('/score')}>Empezar juego!</Button> 
+            <Button onClick = {() =>history.push('/score')}>Let's begin the game!</Button> 
         </div>
     )
 }
