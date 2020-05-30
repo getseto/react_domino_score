@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
 import history from "./Utils/history";
-import {PlayersProvider} from './PlayersContext';
+import { PlayersProvider } from './PlayersContext';
 
 // A function that routes the user to the right place
 // after login
@@ -26,7 +26,7 @@ ReactDOM.render(
     onRedirectCallback={onRedirectCallback}
   >
     <PlayersProvider>
-      <App />
+        <App />
     </PlayersProvider>
   </Auth0Provider>,
   document.getElementById("root")
