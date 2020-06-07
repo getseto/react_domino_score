@@ -1,31 +1,17 @@
 import React, {useContext, useState} from 'react';
 import  { PlayersContext } from '../PlayersContext';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, TableFooter } from '@material-ui/core';
-import Score from '../Components/Score';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, TableFooter, TextField } from '@material-ui/core';
 
 const GameScore = () => {
     const { game, addScoresToGame } = useContext(PlayersContext);
-    
-    const row = []
     const players = game.map(obj => obj.player)
     const [newScore, setNewScore] = useState([]);
-    
     const handleSubmit = (data) => {
-        console.log(data)
+        const parseData = data.map(score => parseInt(score, 10))
+        addScoresToGame(parseData)
+        setNewScore()
+        setNewScore([])
     }
-
-    // console.log(players);
-    
-
-    // function createRow(number, scoreOne, scoreTwo, scoreThree) {
-    //     return {number, score1, score2, score3}
-    // }
-    
-    // function totalOne(playerOne) {
-    //     return playerOne.map(({scoreOne}) => scoreOne).reduce((sum, i) => sum + i, 0);
-    
-    
-    // const roundsPlayed = game[0].scores.length
     
     return (
         <form onSubmit={handleSubmit}>
@@ -41,18 +27,18 @@ const GameScore = () => {
                                     {player}
                                 </TableCell>
                             ))}
-                            <TableCell>Guardar</TableCell>
+                            <TableCell>Save</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         { game[0].scores.map((round, roundNumber)=> (
-                            <TableRow>
+                            <TableRow key={roundNumber}>
                                 <TableCell>
-                                    {roundNumber}
+                                    {roundNumber + 1}
                                 </TableCell>
-                            { game.map((obj, index) => (
-                                <TableCell key={`${index}-${obj.player}`} align="center">
-                                    obj.scores[roundNumber]
+                            { game.map((player, index) => (
+                                <TableCell key={`${player.player}-${index}`} align="center">
+                                    {player.scores[roundNumber]}
                                 </TableCell>
                             ))}
                             </TableRow>
@@ -64,14 +50,13 @@ const GameScore = () => {
                             </TableCell>
                             { game.map((obj, index) => (
                                 <TableCell key={obj.player}>
-                                    <input onChange={(event) => {
+                                    <TextField onChange={(event) => {
                                         newScore[index] = event.target.value
                                          setNewScore(newScore)
-                                        }} name={`score-${obj.player}`} />
+                                        }} name={`score-${obj.player}`} value={newScore[index]} />
                                 </TableCell>
                             )) }
-                            <TableCell><button type="submit" onClick={(event) => {
-                                event.preventDefault();
+                            <TableCell><button type="reset" onClick={(event) => {
                                 handleSubmit(newScore)
                                 }}>Save!</button></TableCell>
                         </TableRow>
@@ -81,13 +66,15 @@ const GameScore = () => {
                             <TableCell>
                                 Total
                             </TableCell>
-                            <TableCell>
-                            </TableCell>
+                            { game.map((player, index) => (
+                                <TableCell key={index} align="center">
+                                    {player.scores.reduce((sum, i) => sum + i, 0)}
+                                </TableCell>
+                            ))}
                         </TableRow>
                     </TableFooter>
                 </Table>
             </TableContainer>
-            <Button>Agregar puntaje</Button>
         </form>
     )
 }
